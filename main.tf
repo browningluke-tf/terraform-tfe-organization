@@ -26,7 +26,7 @@ resource "tfe_workspace" "workspaces" {
   name        = each.key
   description = lookup(each.value, "description", "")
   project_id  = can(each.value.project) ? tfe_project.projects[each.value.project].id : null
-  tag_names   = lookup(each.value, "tags", [])
+  tag_names   = concat(lookup(each.value, "tags", []), ["managed-in-terraform"])
 
   # Execution
   execution_mode      = lookup(each.value, "execution_mode", "local")
