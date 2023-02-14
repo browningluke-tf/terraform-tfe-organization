@@ -33,6 +33,8 @@ resource "tfe_workspace" "workspaces" {
   speculative_enabled = lookup(each.value, "speculative_plans", true)
   auto_apply          = lookup(each.value, "auto_apply", false)
 
+  queue_all_runs = lookup(each.value, "queue_all_runs", true)
+
   working_directory = can(each.value.vcs.working_dir) ? each.value.vcs.working_dir : null
 
   # VCS
