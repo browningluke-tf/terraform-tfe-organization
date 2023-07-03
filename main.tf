@@ -37,6 +37,8 @@ resource "tfe_workspace" "workspaces" {
 
   working_directory = can(each.value.vcs.working_dir) ? each.value.vcs.working_dir : null
 
+  trigger_patterns = try(each.value.vcs.trigger_patterns, null)
+
   # VCS
   dynamic "vcs_repo" {
     for_each = can(each.value.vcs.repo) ? [each.value.vcs] : []
